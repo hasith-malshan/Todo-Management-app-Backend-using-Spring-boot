@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("staticService")
-public class TodoServiceStatic {
+public class TodoServiceStatic implements TodoService{
     private List<Todo> todoList = new ArrayList<>();
 
     {
@@ -20,4 +20,13 @@ public class TodoServiceStatic {
     public List<Todo> getAllTodos(){
         return todoList;
     }
+
+    @Override
+    public Todo getSingleTodo(Integer id) {
+        return searchSingleTodo(id);
+    }
+    private Todo searchSingleTodo(Integer id){
+       return todoList.stream().filter(todo -> todo.getId().equals(id)).findFirst().get();
+    }
+
 }
