@@ -30,4 +30,8 @@ public class TodoServiceStatic implements TodoService{
        return todoList.stream().filter(todo -> todo.getId().equals(id)).findFirst().get();
     }
 
+    @Override
+    public void deleteTodo(Integer id) {
+        todoList.remove(searchSingleTodo(id));
+    }
 }

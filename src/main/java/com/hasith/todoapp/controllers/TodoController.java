@@ -4,6 +4,7 @@ import com.hasith.todoapp.model.Todo;
 import com.hasith.todoapp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -34,5 +35,10 @@ public class TodoController {
         return todoService.getSingleTodo(id);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletetodo(@PathVariable("id") Integer id){
+        todoService.deleteTodo(id);
+        return ResponseEntity.ok("Todo Deleted");
+    }
 
 }
