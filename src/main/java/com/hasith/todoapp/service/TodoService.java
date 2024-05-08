@@ -10,4 +10,5 @@ public interface TodoService {
     public Todo getSingleTodo(Integer id);
     public void deleteTodo(Integer id);
     public Todo addTodo(TodoDao todoDao);
+    public void updateTodo(Todo todo);
 }

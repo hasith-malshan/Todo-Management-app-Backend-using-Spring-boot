@@ -42,4 +42,11 @@ public class TodoServiceStatic implements TodoService{
         todoList.add(newTodo);
         return newTodo;
     }
+
+    @Override
+    public void updateTodo(Todo todo) {
+       Todo todoToUpdate = searchSingleTodo(todo.getId());
+       todoList.remove(todoToUpdate);
+       todoList.add(todo);
+    }
 }

@@ -49,4 +49,9 @@ public class TodoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(todo);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity updateTodo(@RequestBody Todo todo){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
 }
