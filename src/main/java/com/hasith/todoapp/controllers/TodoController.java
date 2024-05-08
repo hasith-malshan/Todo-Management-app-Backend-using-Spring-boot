@@ -19,7 +19,7 @@ public class TodoController {
     private TodoService todoService;
 
     @Autowired
-    public TodoController(@Qualifier("staticService") TodoService todoService) {
+    public TodoController(@Qualifier("jpaService") TodoService todoService) {
         this.todoService = todoService;
     }
 
