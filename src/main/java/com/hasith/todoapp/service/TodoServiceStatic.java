@@ -28,28 +28,28 @@ public class TodoServiceStatic implements TodoService{
     }
 
     @Override
-    public Todo getSingleTodo(Integer id) {
-        return searchSingleTodo(id);
+    public Todo getSingleTodo(Integer id,String username) {
+        return searchSingleTodo(id,username);
     }
-    private Todo searchSingleTodo(Integer id){
-       return todoList.stream().filter(todo -> todo.getId().equals(id)).findFirst().get();
-    }
-
-    @Override
-    public void deleteTodo(Integer id) {
-        todoList.remove(searchSingleTodo(id));
+    private Todo searchSingleTodo(Integer id,String username){
+       return todoList.stream().filter(todo -> todo.getId().equals(id) && todo.getUsername().equals(username)).findFirst().get();
     }
 
     @Override
-    public Todo addTodo(TodoDao todoDao) {
-        Todo newTodo = new Todo(++todoCount,todoDao.getDescription(),todoDao.getUsername(),todoDao.getTargetDate(),false);
+    public void deleteTodo(Integer id, String username) {
+        todoList.remove(searchSingleTodo(id,username));
+    }
+
+    @Override
+    public Todo addTodo(TodoDao todoDao,String username) {
+        Todo newTodo = new Todo(++todoCount,todoDao.getDescription(),username,todoDao.getTargetDate(),false);
         todoList.add(newTodo);
         return newTodo;
     }
 
     @Override
-    public void updateTodo(Todo todo) {
-       Todo todoToUpdate = searchSingleTodo(todo.getId());
+    public void updateTodo(Todo todo,String username) {
+       Todo todoToUpdate = searchSingleTodo(todo.getId(),username);
        todoList.remove(todoToUpdate);
        todoList.add(todo);
     }

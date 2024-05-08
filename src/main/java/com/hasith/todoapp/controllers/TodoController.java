@@ -33,19 +33,19 @@ public class TodoController {
         return todoService.getAllTodos(username);
     }
     @GetMapping("/get/{id}")
-    public Todo getSingleTodo(@PathVariable("id") Integer id) {
-        return todoService.getSingleTodo(id);
+    public Todo getSingleTodo(@PathVariable("id") Integer id,@PathVariable String username) {
+        return todoService.getSingleTodo(id,username);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletetodo(@PathVariable("id") Integer id){
-        todoService.deleteTodo(id);
+    public ResponseEntity deletetodo(@PathVariable("id") Integer id, @PathVariable String username){
+        todoService.deleteTodo(id,username);
         return ResponseEntity.ok("Todo Deleted");
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Todo> addTodo(@RequestBody TodoDao todoDao){
-        Todo todo = todoService.addTodo(todoDao);
+    public ResponseEntity<Todo> addTodo(@RequestBody TodoDao todoDao,@PathVariable String username){
+        Todo todo = todoService.addTodo(todoDao,username);
         return ResponseEntity.status(HttpStatus.CREATED).body(todo);
     }
 

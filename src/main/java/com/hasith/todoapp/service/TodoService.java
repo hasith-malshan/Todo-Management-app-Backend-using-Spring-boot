@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface TodoService {
     public List<Todo> getAllTodos(String username);
-    public Todo getSingleTodo(Integer id);
-    public void deleteTodo(Integer id);
-    public Todo addTodo(TodoDao todoDao);
-    public void updateTodo(Todo todo);
+    public Todo getSingleTodo(Integer id,String username);
+    public void deleteTodo(Integer id,String username);
+    public Todo addTodo(TodoDao todoDao,String username);
+    public void updateTodo(Todo todo,String username);
 }
