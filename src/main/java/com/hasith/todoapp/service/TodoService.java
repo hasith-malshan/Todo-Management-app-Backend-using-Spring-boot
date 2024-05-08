@@ -6,7 +6,7 @@ import com.hasith.todoapp.model.Todo;
 import java.util.List;
 
 public interface TodoService {
-    public List<Todo> getAllTodos();
+    public List<Todo> getAllTodos(String username);
     public Todo getSingleTodo(Integer id);
     public void deleteTodo(Integer id);
     public Todo addTodo(TodoDao todoDao);

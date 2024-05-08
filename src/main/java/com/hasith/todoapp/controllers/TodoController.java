@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/todos/{username}")
+@RequestMapping("/users/{username}/todos")
 public class TodoController {
 
     private TodoService todoService;
@@ -29,8 +29,8 @@ public class TodoController {
     }
 
     @GetMapping("/get/all")
-    public List<Todo> getAllTodos() {
-        return todoService.getAllTodos();
+    public List<Todo> getAllTodos(@PathVariable String username) {
+        return todoService.getAllTodos(username);
     }
     @GetMapping("/get/{id}")
     public Todo getSingleTodo(@PathVariable("id") Integer id) {

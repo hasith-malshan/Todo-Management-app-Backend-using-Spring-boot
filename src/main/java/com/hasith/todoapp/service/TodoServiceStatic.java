@@ -19,8 +19,12 @@ public class TodoServiceStatic implements TodoService{
     todoList.add(new Todo(++todoCount,"Complete Angular" , "Hasith Malshan" , LocalDate.now().plusMonths(6), false));
     }
 
-    public List<Todo> getAllTodos(){
-        return todoList;
+    public List<Todo> getAllTodos(String username){
+        return findTodosOfUser(username);
+    }
+
+    private List<Todo> findTodosOfUser(String username){
+        return todoList.stream().filter(todo -> todo.getUsername().equals(username)).toList();
     }
 
     @Override
