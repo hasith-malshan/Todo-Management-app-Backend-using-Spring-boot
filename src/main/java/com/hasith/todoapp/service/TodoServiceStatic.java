@@ -10,11 +10,12 @@ import java.util.List;
 @Service("staticService")
 public class TodoServiceStatic implements TodoService{
     private List<Todo> todoList = new ArrayList<>();
+    private Integer todoCount = 0;
 
     {
-    todoList.add(new Todo(1,"Complete AWS" , "Hasith Malshan" , LocalDate.now().plusYears(1), false));
-    todoList.add(new Todo(2,"Complete MicroServices" , "Hasith Malshan" , LocalDate.now().plusYears(1).plusMonths(6), false));
-    todoList.add(new Todo(3,"Complete Angular" , "Hasith Malshan" , LocalDate.now().plusMonths(6), false));
+    todoList.add(new Todo(++todoCount,"Complete AWS" , "Hasith Malshan" , LocalDate.now().plusYears(1), false));
+    todoList.add(new Todo(++todoCount,"Complete MicroServices" , "Hasith Malshan" , LocalDate.now().plusYears(1).plusMonths(6), false));
+    todoList.add(new Todo(++todoCount,"Complete Angular" , "Hasith Malshan" , LocalDate.now().plusMonths(6), false));
     }
 
     public List<Todo> getAllTodos(){
