@@ -1,9 +1,11 @@
 package com.hasith.todoapp.controllers;
 
+import com.hasith.todoapp.dao.TodoDao;
 import com.hasith.todoapp.model.Todo;
 import com.hasith.todoapp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +41,12 @@ public class TodoController {
     public ResponseEntity deletetodo(@PathVariable("id") Integer id){
         todoService.deleteTodo(id);
         return ResponseEntity.ok("Todo Deleted");
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Todo> addTodo(@RequestBody TodoDao todoDao){
+        Todo todo = todoService.addTodo(todoDao);
+        return ResponseEntity.status(HttpStatus.CREATED).body(todo);
     }
 
 }

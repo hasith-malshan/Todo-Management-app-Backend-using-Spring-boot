@@ -1,5 +1,6 @@
 package com.hasith.todoapp.service;
 
+import com.hasith.todoapp.dao.TodoDao;
 import com.hasith.todoapp.model.Todo;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,12 @@ public class TodoServiceStatic implements TodoService{
     @Override
     public void deleteTodo(Integer id) {
         todoList.remove(searchSingleTodo(id));
+    }
+
+    @Override
+    public Todo addTodo(TodoDao todoDao) {
+        Todo newTodo = new Todo(++todoCount,todoDao.getDescription(),todoDao.getUsername(),todoDao.getTargetDate(),false);
+        todoList.add(newTodo);
+        return newTodo;
     }
 }
