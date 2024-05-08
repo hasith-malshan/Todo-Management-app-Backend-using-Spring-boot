@@ -25,7 +25,7 @@ public class TodoController {
         return new Todo(1, "Complete todo app Project", "Hasith Malsha", LocalDate.now(), false);
     }
 
-    @GetMapping("/get-all")
+    @GetMapping("/get/all")
     public List<Todo> getAllTodos() {
         return todoService.getAllTodos();
     }
