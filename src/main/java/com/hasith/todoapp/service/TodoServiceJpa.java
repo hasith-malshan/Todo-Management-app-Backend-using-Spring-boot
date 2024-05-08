@@ -2,55 +2,50 @@ package com.hasith.todoapp.service;
 
 import com.hasith.todoapp.dao.TodoDao;
 import com.hasith.todoapp.model.Todo;
+import com.hasith.todoapp.repository.TodoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service("jpaService")
 public class TodoServiceJpa implements TodoService{
-    private List<Todo> todoList = new ArrayList<>();
-    private Integer todoCount = 0;
+    private TodoRepository todoRepository;
 
-    {
-    todoList.add(new Todo(++todoCount,"Complete AWS" , "Hasith Malshan" , LocalDate.now().plusYears(1), false));
-    todoList.add(new Todo(++todoCount,"Complete MicroServices" , "Hasith Malshan" , LocalDate.now().plusYears(1).plusMonths(6), false));
-    todoList.add(new Todo(++todoCount,"Complete Angular" , "Hasith Malshan" , LocalDate.now().plusMonths(6), false));
+    @Autowired
+    public TodoServiceJpa(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
     }
 
     public List<Todo> getAllTodos(String username){
-        return findTodosOfUser(username);
-    }
-
-    private List<Todo> findTodosOfUser(String username){
-        return todoList.stream().filter(todo -> todo.getUsername().equals(username)).toList();
+        return todoRepository.findByUsername(username);
     }
 
     @Override
-    public Todo getSingleTodo(Integer id,String username) {
-        return searchSingleTodo(id,username);
-    }
-    private Todo searchSingleTodo(Integer id,String username){
-       return todoList.stream().filter(todo -> todo.getId().equals(id) && todo.getUsername().equals(username)).findFirst().get();
+    public Todo getSingleTodo(Integer id, String username) {
+        return todoRepository.findById(id).get();
     }
 
     @Override
     public void deleteTodo(Integer id, String username) {
-        todoList.remove(searchSingleTodo(id,username));
+        Todo todoToDelete = getSingleTodo(id, username);
+        todoRepository.delete(todoToDelete);
     }
 
-    @Override
-    public Todo addTodo(TodoDao todoDao,String username) {
-        Todo newTodo = new Todo(++todoCount,todoDao.getDescription(),username,todoDao.getTargetDate(),false);
-        todoList.add(newTodo);
-        return newTodo;
-    }
+//    @Override
+//    public Todo addTodo(TodoDao todoDao,String username) {
+//        Todo newTodo = new Todo(++todoCount,todoDao.getDescription(),username,todoDao.getTargetDate(),false);
+//        todoList.add(newTodo);
+//        return newTodo;
+//    }
 
     @Override
     public void updateTodo(Todo todo,String username) {
-       Todo todoToUpdate = searchSingleTodo(todo.getId(),username);
-       todoList.remove(todoToUpdate);
-       todoList.add(todo);
+       Todo todoToUpdate = todoRepository.findById(todo.getId()).get();
+       todoRepository.delete(todoToUpdate);
+       todoRepository.save(todo);
     }
 }

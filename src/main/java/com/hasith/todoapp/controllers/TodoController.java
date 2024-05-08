@@ -43,11 +43,11 @@ public class TodoController {
         return ResponseEntity.ok("Todo Deleted");
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Todo> addTodo(@RequestBody TodoDao todoDao,@PathVariable String username){
-        Todo todo = todoService.addTodo(todoDao,username);
-        return ResponseEntity.status(HttpStatus.CREATED).body(todo);
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<Todo> addTodo(@RequestBody TodoDao todoDao,@PathVariable String username){
+//        Todo todo = todoService.addTodo(todoDao,username);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(todo);
+//    }
 
     @PutMapping("/update")
     public ResponseEntity updateTodo(@RequestBody Todo todo){
