@@ -35,12 +35,12 @@ public class TodoServiceJpa implements TodoService{
         todoRepository.delete(todoToDelete);
     }
 
-//    @Override
-//    public Todo addTodo(TodoDao todoDao,String username) {
-//        Todo newTodo = new Todo(++todoCount,todoDao.getDescription(),username,todoDao.getTargetDate(),false);
-//        todoList.add(newTodo);
-//        return newTodo;
-//    }
+    @Override
+    public Todo addTodo(TodoDao todoDao,String username) {
+        Todo newTodo = new Todo(null,todoDao.getDescription(),username,todoDao.getTargetDate(),false);
+       todoRepository.save(newTodo);
+        return newTodo;
+    }
 
     @Override
     public void updateTodo(Todo todo,String username) {
