@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/todos")
+@RequestMapping("/todos/{username}")
 public class TodoController {
 
     private TodoService todoService;
