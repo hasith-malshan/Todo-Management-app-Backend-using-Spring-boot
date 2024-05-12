@@ -44,14 +44,16 @@ public class TodoController {
         return ResponseEntity.ok("Todo Deleted");
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Todo> addTodo(@RequestBody TodoDao todoDao,@PathVariable String username){
         Todo todo = todoService.addTodo(todoDao,username);
         return ResponseEntity.status(HttpStatus.CREATED).body(todo);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/{id}")
     public ResponseEntity updateTodo(@RequestBody Todo todo){
+        System.out.println(todo.getId());
+        todoService.updateTodo(todo,todo.getUsername());
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
