@@ -45,7 +45,6 @@ public class TodoServiceJpa implements TodoService{
     @Override
     public void updateTodo(Todo todo,String username) {
        Todo todoToUpdate = todoRepository.findById(todo.getId()).get();
-       todoRepository.delete(todoToUpdate);
        todoRepository.save(todo);
     }
 }
